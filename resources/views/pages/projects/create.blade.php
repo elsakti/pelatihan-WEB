@@ -1,20 +1,35 @@
 @extends('layout.main')
 
 @section('content')
-    <form>
+
+    @if (session()->has('errors'))
+        <div class="alert alert-danger">
+            {{ session()->get('errors') }}
+        </div>
+    @endif
+
+    <form action="{{ route('project_store') }}" method="POST" enctype="multipart/form-data">
+
+        @csrf
+
         <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            <label for="judul" class="form-label">Silahkan Tambahkan Judul Project! </label>
+            <input type="text" class="form-control" id="judul" name="judul" required>
         </div>
+
         <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" >
+            <label for="keterangan" class="form-label">Silahkan Beri Keterangan! </label>
+            <input type="text" class="form-control" id="keterangan" name="keterangan" required>
         </div>
-        <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+
+        <div class="mb-3">
+            <label for="alasan" class="form-label">Apa alasanmu? </label>
+            <input type="text" class="form-control" id="alasan" name="alasan" required>
         </div>
+
+        <a href="{{ route('project_index') }}" class="btn btn-secondary">Kembali</a>
+
         <button type="submit" class="btn btn-primary">Submit</button>
+
     </form>
 @endsection

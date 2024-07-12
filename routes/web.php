@@ -12,6 +12,10 @@ Route::get('/projects', [ProjectController::class, 'index'])->name('project_inde
 
 Route::get('/projects/create', [ProjectController::class, 'create'])->name('project_create');
 
+Route::delete('/projects/{id}/delete', [ProjectController::class, 'destroy'])->name('project_delete');
+
+Route::post('/projects/store', [ProjectController::class, 'store'])->name('project_store');
+
 Route::fallback(function(){
     return view('pages.errors.404');
 });
