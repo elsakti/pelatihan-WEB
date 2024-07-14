@@ -47,6 +47,10 @@
                         method="POST"
                         onsubmit="return confirm('Yakin ingin menghapus data?')">
 
+                        <a href="{{ route('project_edit', $project->id ) }}" class="btn btn-warning">
+                            EDIT
+                        </a>
+
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">

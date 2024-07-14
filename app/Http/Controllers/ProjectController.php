@@ -57,6 +57,38 @@ class ProjectController extends Controller
 
     }
 
+    public function edit($id)
+    {
+        $project = Project::find($id);
+        return view('pages.projects.edit',[
+            'project' => $project,
+            'title' => 'Edit Project',
+            'background_color' => 'blue'
+        ]);
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $project = Project::find($id);
+
+        $validator = Validator::make($request->all(), [
+            'judul' => 'required|unique:projects,judul,' . $id . 'ID' ,
+            'keterangan' => 'required',
+            'alasan' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('errors', 'Input tidak valid');
+        }
+
+        $validatedData = $validator->validated();
+
+        $project->update($validatedData);
+
+        return redirect()->route('project_index')->with('success' , 'Data Project telah diperbarui');
+
+    }
+
 
 
 

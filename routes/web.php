@@ -16,6 +16,10 @@ Route::delete('/projects/{id}/delete', [ProjectController::class, 'destroy'])->n
 
 Route::post('/projects/store', [ProjectController::class, 'store'])->name('project_store');
 
+Route::get('/projects/{id}/edit', [ProjectController::class, 'edit'])->name('project_edit');
+
+Route::put('/projects/{id}/update', [ProjectController::class, 'update'])->name('project_update');
+
 Route::fallback(function(){
     return view('pages.errors.404');
 });
