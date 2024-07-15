@@ -17,6 +17,26 @@
           <li class="nav-item">
             <a class="nav-link {{ request()->is('projects') ? 'active' : '' }}" aria-current="page" href="{{ route('project_index') }}">Project Saya</a>
           </li>
+
+          @auth
+
+            <li class="nav-item">
+                {{-- <a class="nav-link active" aria-current="page" href="{{ route('logout') }}">Logout</a> --}}
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    @method('POST')
+                    <button type="submit" class="nav-link active">Logout</button>
+                </form>
+            </li>
+
+          @else
+
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('login') ? 'active' : '' }}" aria-current="page" href="{{ route('login') }}">Login</a>
+            </li>
+
+          @endauth
+
         </ul>
       </div>
     </div>
